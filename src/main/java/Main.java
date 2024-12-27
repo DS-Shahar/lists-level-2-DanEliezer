@@ -1,3 +1,5 @@
+package dan;
+
 import java.util.Scanner;
 public class Main {
     public static Scanner reader = new Scanner(System.in);
@@ -5,13 +7,14 @@ public class Main {
         int[] arr = {4, 2, 7, 1, 3, 7, 5, 9, 6};
         Node<Integer> head = makeList(arr);
 
-        
+
         int num = 7;
         int result = Distances1(head, num);
         if (result != -1) {
             System.out.println("Sum of distances for value " + num + ": " + result);
         } else {
-            System.out.println("Value " + num+ + " not found in the list.");
+        	System.out.println("Value " + num + " not found in the list.");
+
         }
     }
 
@@ -137,7 +140,7 @@ public class Main {
             Node<Integer> minNode = head;
             Node<Integer> prev = null;
             Node<Integer> current = head;
-            
+
             while (current != null) {
                 if (current.getValue() < minNode.getValue()) {
                     prevMin = prev;
@@ -146,7 +149,7 @@ public class Main {
                 prev = current;
                 current = current.getNext();
             }
-            
+
             if (prevMin == null) {               
                 head = head.getNext();
             } else {                
@@ -185,7 +188,19 @@ public class Main {
     	return dfs + dfe;
     }
     public static boolean differentornot(Node<Integer> head, int num) {
-    	
+    	Node<Integer> current = list;
+    	while (current != null) {
+    		Node<Integer> runner = current.getNext();
+    		while (runner != null) {
+    			if (current.getValue().equals(runner.getValue())) {
+    				return false;
+    			}
+    			runner = runner.getNext();
+    		}
+    		current = current.getNext();
+    	}
+    	return true;
+
     }
 
 }
